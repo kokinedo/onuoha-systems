@@ -363,18 +363,20 @@ export default function ServicesPage() {
           </section>
         </FadeInWhenVisible>
 
-        {/* CTA Section - Use FadeInWhenVisible */}
+        {/* CTA Section - Updated Colors */}
         <FadeInWhenVisible delay={0.1}>
-          <section className="w-full py-12 md:py-24 lg:py-32 bg-blue-600 text-primary-foreground">
+          <section className="w-full py-12 md:py-24 lg:py-32 bg-background">
             <div className="container px-4 md:px-6">
               <div className="flex flex-col items-center justify-center space-y-4 text-center">
                 <div className="space-y-2">
-                  <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl text-primary-foreground">Ready to Get Started?</h2>
-                  <p className="max-w-[700px] text-blue-100 md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
+                  <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl text-foreground">
+                    Ready to Get Started?
+                  </h2>
+                  <p className="max-w-[700px] text-muted-foreground md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
                     Book your free consultation today and take the first step toward your dream job
                   </p>
                 </div>
-                <Button size="lg" className="bg-primary-foreground text-blue-600 hover:bg-primary-foreground/90" asChild>
+                <Button size="lg" className="bg-blue-600 text-primary-foreground hover:bg-blue-700" asChild>
                   <Link
                     href="https://calendar.google.com/calendar/u/0/appointments/schedules/AcZssZ3aOfGZfeUdsIhAt7ilBvhGtzzo6hKVsgmUfDKqrLp895XoWiCTH-iy_ADrFdO2FL8HAphywKGP"
                     target="_blank"

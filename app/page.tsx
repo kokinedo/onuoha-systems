@@ -244,20 +244,20 @@ export default function Home() {
           </section>
         </FadeInWhenVisible>
 
-        {/* CTA Section */}
+        {/* CTA Section - Updated Colors */}
         <FadeInWhenVisible delay={0.1}>
-          <section className="w-full py-12 md:py-20 lg:py-28 bg-blue-600 text-primary-foreground">
+          <section className="w-full py-12 md:py-20 lg:py-28 bg-background">
             <div className="container px-4 md:px-6">
               <div className="flex flex-col items-center justify-center space-y-4 text-center">
                 <div className="space-y-2">
-                  <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl text-primary-foreground">
+                  <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl text-foreground">
                     Ready to Transform Your Resume?
                   </h2>
-                  <p className="max-w-[700px] text-blue-100 md:text-lg lg:text-xl/relaxed">
+                  <p className="max-w-[700px] text-muted-foreground md:text-lg lg:text-xl/relaxed">
                     Get started today and increase your chances of landing your dream job
                   </p>
                 </div>
-                <Button size="lg" className="bg-primary-foreground text-blue-600 hover:bg-primary-foreground/90" asChild>
+                <Button size="lg" className="bg-blue-600 text-primary-foreground hover:bg-blue-700" asChild>
                   <Link
                     href="https://calendar.google.com/calendar/u/0/appointments/schedules/AcZssZ3aOfGZfeUdsIhAt7ilBvhGtzzo6hKVsgmUfDKqrLp895XoWiCTH-iy_ADrFdO2FL8HAphywKGP"
                     target="_blank"
@@ -271,15 +271,16 @@ export default function Home() {
           </section>
         </FadeInWhenVisible>
 
-        {/* Contact Section */}
+        {/* Contact Section - REMOVED */}
+        {/*
         <FadeInWhenVisible delay={0.1}>
           <section id="contact" className="w-full py-12 md:py-20 lg:py-28 bg-muted/40">
             <div className="container px-4 md:px-6">
-              <div className="grid gap-10 lg:grid-cols-2">
-                <div className="space-y-4">
+              <div className="flex flex-col items-center text-center gap-10">
+                <div className="space-y-4 max-w-lg">
                   <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl text-foreground">Contact Us</h2>
                   <p className="text-muted-foreground md:text-lg">
-                    Ready to get started or have questions? Reach out to us using the form or book a consultation.
+                    Ready to get started or have questions? Book a consultation.
                   </p>
                   <Button size="lg" variant="default" className="bg-blue-600 hover:bg-blue-700" asChild>
                     <Link
@@ -291,31 +292,11 @@ export default function Home() {
                     </Link>
                   </Button>
                 </div>
-                <div className="space-y-4">
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                    <div className="space-y-2">
-                      <label htmlFor="name" className="text-sm font-medium leading-none text-foreground">Name</label>
-                      <Input id="name" placeholder="Enter your name" />
-                    </div>
-                    <div className="space-y-2">
-                      <label htmlFor="email" className="text-sm font-medium leading-none text-foreground">Email</label>
-                      <Input id="email" type="email" placeholder="Enter your email" />
-                    </div>
-                  </div>
-                  <div className="space-y-2">
-                    <label htmlFor="subject" className="text-sm font-medium leading-none text-foreground">Subject</label>
-                    <Input id="subject" placeholder="Enter subject" />
-                  </div>
-                  <div className="space-y-2">
-                    <label htmlFor="message" className="text-sm font-medium leading-none text-foreground">Message</label>
-                    <Textarea id="message" placeholder="Enter your message" />
-                  </div>
-                  <Button size="lg" variant="default" className="w-full bg-blue-600 hover:bg-blue-700">Send Message</Button>
-                </div>
               </div>
             </div>
           </section>
         </FadeInWhenVisible>
+        */}
       </main>
 
       {/* Footer - Theme Aware - FINAL VERSION */}

@@ -1,5 +1,6 @@
 "use client";
 
+import React, { useState, FormEvent } from 'react';
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
@@ -13,6 +14,72 @@ import { FadeIn, FadeInWhenVisible } from "@/components/ui/fade-in"
 import { ThemeToggle } from "@/components/ui/theme-toggle"
 
 export default function ContactPage() {
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    subject: '',
+    service: '',
+    message: '',
+    'bot-field': '',
+  });
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitStatus, setSubmitStatus] = useState<'success' | 'error' | null>(null);
+  const [submitMessage, setSubmitMessage] = useState('');
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
+    const { name, value } = e.target;
+    setFormData((prev) => ({ ...prev, [name]: value }));
+  };
+
+  const handleRadioChange = (value: string) => {
+    setFormData((prev) => ({ ...prev, service: value }));
+  };
+
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    setIsSubmitting(true);
+    setSubmitStatus(null);
+    setSubmitMessage('');
+
+    if (formData['bot-field']) {
+      console.log('Bot submission detected');
+      setIsSubmitting(false);
+      setSubmitStatus('success');
+      setSubmitMessage('Thank you for your message!');
+      return;
+    }
+
+    const { 'bot-field': botField, ...dataToSend } = formData;
+
+    try {
+      const response = await fetch('/api/contact', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(dataToSend),
+      });
+
+      if (response.ok) {
+        setSubmitStatus('success');
+        setSubmitMessage('Thank you! Your message has been sent successfully.');
+        setFormData({
+          name: '', email: '', subject: '', service: '', message: '', 'bot-field': ''
+        });
+      } else {
+        const errorData = await response.json();
+        setSubmitStatus('error');
+        setSubmitMessage(errorData.message || 'An error occurred. Please try again.');
+      }
+    } catch (error) {
+      console.error('Form submission error:', error);
+      setSubmitStatus('error');
+      setSubmitMessage('An unexpected error occurred. Please try again later.');
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
   return (
     <div className="flex flex-col min-h-screen bg-background text-foreground">
       {/* Header */}
@@ -66,17 +133,20 @@ export default function ContactPage() {
           </section>
         </FadeIn>
 
-        {/* Contact Information Section - Use FadeInWhenVisible */}
+        {/* Contact Information Section - Modified for Centering */}
         <FadeInWhenVisible delay={0.1}>
           <section className="w-full py-12 md:py-24 lg:py-32 bg-muted/40">
             <div className="container px-4 md:px-6">
-              <div className="grid gap-10 lg:grid-cols-2">
-                <div className="space-y-6">
-                  <h2 className="text-3xl font-bold mb-6 text-foreground">Get in Touch</h2>
-                  <p className="text-muted-foreground mb-8">
-                    Have questions about our services or want to discuss your specific needs? Reach out using the contact form or book a free consultation.
+              {/* Changed grid to flex column, centered items and text */}
+              <div className="flex flex-col items-center text-center gap-10">
+                {/* Left Column Content (Now Centered) */}
+                <div className="space-y-6 max-w-lg"> {/* Added max-width */}
+                  <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl text-foreground">
+                    Get in Touch
+                  </h2>
+                  <p className="text-muted-foreground md:text-lg">
+                    Have questions about our services or want to discuss your specific needs? Book a free consultation.
                   </p>
-
                   <Button size="lg" variant="default" className="bg-blue-600 hover:bg-blue-700" asChild>
                     <Link
                       href="https://calendar.google.com/calendar/u/0/appointments/schedules/AcZssZ3aOfGZfeUdsIhAt7ilBvhGtzzo6hKVsgmUfDKqrLp895XoWiCTH-iy_ADrFdO2FL8HAphywKGP"
@@ -88,8 +158,10 @@ export default function ContactPage() {
                   </Button>
                 </div>
 
+                {/* Right Column (Form Card) - COMMENTED OUT */}
+                {/*
                 <div>
-                  <Card className="bg-card text-card-foreground">
+                  <Card className="bg-card text-card-foreground shadow-lg">
                     <CardHeader>
                       <CardTitle className="text-card-foreground">Send Us a Message</CardTitle>
                       <CardDescription className="text-muted-foreground">
@@ -99,70 +171,126 @@ export default function ContactPage() {
                     <CardContent>
                       <form
                         name="contact"
-                        method="POST"
-                        data-netlify="true"
-                        data-netlify-honeypot="bot-field"
+                        onSubmit={handleSubmit}
                         className="space-y-6"
                       >
-                        <input type="hidden" name="form-name" value="contact" />
                         <p className="hidden">
                           <label>
-                            Don't fill this out if you're human: <input name="bot-field" />
+                            Don't fill this out if you're human:
+                            <input
+                              name="bot-field"
+                              value={formData['bot-field']}
+                              onChange={handleChange}
+                            />
                           </label>
                         </p>
                         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                           <div className="space-y-2">
                             <Label htmlFor="name" className="text-foreground">Name</Label>
-                            <Input id="name" name="name" placeholder="Enter your name" required className="bg-background" />
+                            <Input
+                              id="name"
+                              name="name"
+                              placeholder="Enter your name"
+                              required
+                              className="bg-background"
+                              value={formData.name}
+                              onChange={handleChange}
+                              disabled={isSubmitting}
+                            />
                           </div>
                           <div className="space-y-2">
                             <Label htmlFor="email" className="text-foreground">Email</Label>
-                            <Input id="email" name="email" type="email" placeholder="Enter your email" required className="bg-background" />
+                            <Input
+                              id="email"
+                              name="email"
+                              type="email"
+                              placeholder="Enter your email"
+                              required
+                              className="bg-background"
+                              value={formData.email}
+                              onChange={handleChange}
+                              disabled={isSubmitting}
+                            />
                           </div>
                         </div>
 
                         <div className="space-y-2">
-                          <Label htmlFor="phone">Phone (optional)</Label>
-                          <Input id="phone" placeholder="Enter your phone number" />
+                          <Label htmlFor="subject" className="text-foreground">Subject</Label>
+                          <Input
+                            id="subject"
+                            name="subject"
+                            placeholder="Enter subject"
+                            required
+                            className="bg-background"
+                            value={formData.subject}
+                            onChange={handleChange}
+                            disabled={isSubmitting}
+                          />
                         </div>
 
                         <div className="space-y-2">
                           <Label className="text-foreground">Service Interested In</Label>
-                          <RadioGroup name="service" defaultValue="none" className="flex flex-wrap gap-4 text-foreground">
-                            <div className="flex items-center space-x-2">
+                          <RadioGroup
+                            name="service"
+                            defaultValue="ats-resume"
+                            className="flex flex-col space-y-1"
+                            onValueChange={handleRadioChange}
+                            value={formData.service}
+                            disabled={isSubmitting}
+                          >
+                            <div className="flex items-center space-x-3">
                               <RadioGroupItem value="ats-resume" id="ats-resume" />
-                              <Label htmlFor="ats-resume">ATS Resume Writing</Label>
+                              <Label htmlFor="ats-resume" className="text-muted-foreground">ATS Resume Writing</Label>
                             </div>
-                            <div className="flex items-center space-x-2">
-                              <RadioGroupItem value="review" id="review" />
-                              <Label htmlFor="review">Resume Review</Label>
+                            <div className="flex items-center space-x-3">
+                              <RadioGroupItem value="resume-review" id="resume-review" />
+                              <Label htmlFor="resume-review" className="text-muted-foreground">Resume Review</Label>
                             </div>
-                            <div className="flex items-center space-x-2">
-                              <RadioGroupItem value="coaching" id="coaching" />
-                              <Label htmlFor="coaching">Career Coaching</Label>
+                            <div className="flex items-center space-x-3">
+                              <RadioGroupItem value="career-coaching" id="career-coaching" />
+                              <Label htmlFor="career-coaching" className="text-muted-foreground">Career Coaching</Label>
                             </div>
-                            <div className="flex items-center space-x-2">
+                            <div className="flex items-center space-x-3">
                               <RadioGroupItem value="other" id="other" />
-                              <Label htmlFor="other">Other</Label>
+                              <Label htmlFor="other" className="text-muted-foreground">Other/Not Sure</Label>
                             </div>
                           </RadioGroup>
                         </div>
 
                         <div className="space-y-2">
-                          <Label htmlFor="subject" className="text-foreground">Subject</Label>
-                          <Input id="subject" name="subject" placeholder="Enter subject" required className="bg-background" />
-                        </div>
-
-                        <div className="space-y-2">
                           <Label htmlFor="message" className="text-foreground">Message</Label>
-                          <Textarea id="message" name="message" placeholder="Enter your message" required className="bg-background" />
+                          <Textarea
+                            id="message"
+                            name="message"
+                            placeholder="Enter your message"
+                            required
+                            className="bg-background"
+                            value={formData.message}
+                            onChange={handleChange}
+                            disabled={isSubmitting}
+                          />
                         </div>
 
-                        <Button type="submit" className="w-full bg-blue-600 hover:bg-blue-700 text-primary-foreground">Send Message</Button>
+                        <Button
+                          type="submit"
+                          size="lg"
+                          variant="default"
+                          className="w-full bg-blue-600 hover:bg-blue-700"
+                          disabled={isSubmitting}
+                        >
+                          {isSubmitting ? 'Sending...' : 'Send Message'}
+                        </Button>
+
+                        {submitStatus && (
+                          <p className={`mt-4 text-center text-sm ${submitStatus === 'success' ? 'text-green-600' : 'text-red-600'}`}>
+                            {submitMessage}
+                          </p>
+                        )}
                       </form>
                     </CardContent>
                   </Card>
                 </div>
+                */}
               </div>
             </div>
           </section>
@@ -263,8 +391,12 @@ export default function ContactPage() {
                   Don't see your question answered here? Contact us directly and we'll be happy to help.
                 </p>
                 <Button variant="outline" className="flex items-center gap-2 mx-auto border-blue-600 text-blue-600 hover:bg-blue-100 hover:text-blue-700" asChild>
-                  <Link href="mailto:info@onuohasystems.com">
-                    Email Us Your Question
+                  <Link
+                    href="https://calendar.google.com/calendar/u/0/appointments/schedules/AcZssZ3aOfGZfeUdsIhAt7ilBvhGtzzo6hKVsgmUfDKqrLp895XoWiCTH-iy_ADrFdO2FL8HAphywKGP"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    Ask During Consultation
                     <ArrowRight className="h-4 w-4 text-blue-600" />
                   </Link>
                 </Button>
