@@ -10,6 +10,17 @@ body {
   .text-balance {
     text-wrap: balance;
   }
+  @keyframes float {
+    0%, 100% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-10px); /* Adjust vertical distance as needed */
+    }
+  }
+  .animate-float {
+    animation: float 6s ease-in-out infinite; /* Adjust duration and timing as needed */
+  }
 }
 
 @layer base {
