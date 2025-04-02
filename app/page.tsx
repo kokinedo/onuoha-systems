@@ -8,11 +8,12 @@ import { Textarea } from "@/components/ui/textarea"
 import { CheckCircle, FileText, Award, Users, ArrowRight, Mail } from "lucide-react"
 import { MobileNav } from "@/components/ui/mobile-nav"
 import { FadeIn, FadeInWhenVisible } from "@/components/ui/fade-in"
+import { ThemeToggle } from "@/components/ui/theme-toggle"
 
 export default function Home() {
   return (
     <div className="flex flex-col min-h-screen bg-background text-foreground">
-      {/* Header */}
+      {/* Header - Updated: Solid background, ThemeToggle added */}
       <header className="sticky top-0 z-50 w-full border-b bg-background border-border">
         <div className="container flex h-16 items-center justify-between">
           <Link href="/" className="flex items-center gap-2">
@@ -37,8 +38,11 @@ export default function Home() {
             </Link>
           </nav>
           <div className="flex items-center gap-4">
-            <Button variant="default" className="hidden md:inline-flex bg-blue-600 hover:bg-blue-700">Get Started</Button>
+            <Button variant="default" className="hidden md:inline-flex bg-blue-600 hover:bg-blue-700 text-primary-foreground" asChild>
+              <Link href="/contact">Get Started</Link>
+            </Button>
             <MobileNav />
+            <ThemeToggle />
           </div>
         </div>
       </header>
@@ -96,7 +100,7 @@ export default function Home() {
                 <Card className="bg-card text-card-foreground">
                   <CardContent className="p-6 flex flex-col items-center text-center space-y-4">
                     <FileText className="h-12 w-12 text-blue-600" />
-                    <h3 className="text-xl font-bold">ATS Resume Writing</h3>
+                    <h3 className="text-xl font-bold text-card-foreground">ATS Resume Writing</h3>
                     <p className="text-muted-foreground">
                       Custom resumes optimized to pass Applicant Tracking Systems and reach human recruiters.
                     </p>
@@ -183,50 +187,47 @@ export default function Home() {
 
         {/* Testimonials Section */}
         <FadeInWhenVisible delay={0.1}>
-          <section id="testimonials" className="w-full py-12 md:py-20 lg:py-28 bg-background">
+          <section id="testimonials" className="w-full py-12 md:py-20 lg:py-28 bg-muted/40">
             <div className="container px-4 md:px-6">
               <div className="flex flex-col items-center justify-center space-y-4 text-center">
                 <div className="space-y-2">
                   <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl text-foreground">Client Success Stories</h2>
                   <p className="max-w-[700px] text-muted-foreground md:text-lg lg:text-xl/relaxed">
-                    See what our clients have to say about our services
+                    Hear from clients who landed their dream jobs with our help
                   </p>
                 </div>
               </div>
               <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-8">
-                <Card>
+                <Card className="bg-card text-card-foreground">
                   <CardContent className="p-6 space-y-4">
-                    <p className="italic text-muted-foreground">
-                      "After using Onuoha Systems' resume service, I started getting calls for interviews within days.
-                      Their ATS optimization really works!"
+                    <p className="text-card-foreground italic">
+                      "Onuoha Systems transformed my outdated resume into a modern, ATS-friendly document. I started
+                      getting interviews within a week!"
                     </p>
-                    <div>
-                      <p className="font-bold">Aisha Patel</p>
-                      <p className="text-sm text-muted-foreground">Marketing Professional</p>
+                    <div className="flex items-center gap-2">
+                      <span className="font-semibold text-card-foreground">- Sarah K.</span>
                     </div>
                   </CardContent>
                 </Card>
-                <Card>
+                <Card className="bg-card text-card-foreground">
                   <CardContent className="p-6 space-y-4">
-                    <p className="italic text-muted-foreground">
+                    <p className="text-card-foreground italic">
                       "I was struggling to get past the application stage. After getting my resume rewritten, I landed
                       three interviews in one week!"
                     </p>
-                    <div>
-                      <p className="font-bold">Miguel Hernandez</p>
-                      <p className="text-sm text-muted-foreground">Software Engineer</p>
+                    <div className="flex items-center gap-2">
+                      <span className="font-semibold text-card-foreground">- Miguel Hernandez</span>
                     </div>
                   </CardContent>
                 </Card>
-                <Card>
+                <Card className="bg-card text-card-foreground">
                   <CardContent className="p-6 space-y-4">
-                    <p className="italic text-muted-foreground">
+                    <p className="text-card-foreground italic">
                       "The career coaching combined with the resume service gave me the confidence and tools I needed to
                       make a successful career change."
                     </p>
-                    <div>
-                      <p className="font-bold">Zainab Okonkwo</p>
-                      <p className="text-sm text-muted-foreground">Finance Professional</p>
+                    <div className="flex items-center gap-2">
+                      <span className="font-semibold text-card-foreground">- Zainab Okonkwo</span>
                     </div>
                   </CardContent>
                 </Card>
@@ -245,18 +246,18 @@ export default function Home() {
 
         {/* CTA Section */}
         <FadeInWhenVisible delay={0.1}>
-          <section className="w-full py-12 md:py-20 lg:py-28 bg-white text-black">
+          <section className="w-full py-12 md:py-20 lg:py-28 bg-blue-600 text-primary-foreground">
             <div className="container px-4 md:px-6">
               <div className="flex flex-col items-center justify-center space-y-4 text-center">
                 <div className="space-y-2">
-                  <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl text-black">
+                  <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl text-primary-foreground">
                     Ready to Transform Your Resume?
                   </h2>
-                  <p className="max-w-[700px] text-gray-700 md:text-lg lg:text-xl/relaxed">
+                  <p className="max-w-[700px] text-blue-100 md:text-lg lg:text-xl/relaxed">
                     Get started today and increase your chances of landing your dream job
                   </p>
                 </div>
-                <Button size="lg" className="bg-blue-600 text-white hover:bg-blue-700" asChild>
+                <Button size="lg" className="bg-primary-foreground text-blue-600 hover:bg-primary-foreground/90" asChild>
                   <Link
                     href="https://calendar.google.com/calendar/u/0/appointments/schedules/AcZssZ3aOfGZfeUdsIhAt7ilBvhGtzzo6hKVsgmUfDKqrLp895XoWiCTH-iy_ADrFdO2FL8HAphywKGP"
                     target="_blank"
@@ -317,39 +318,36 @@ export default function Home() {
         </FadeInWhenVisible>
       </main>
 
-      {/* Footer - White background and dark text */}
-      <footer className="w-full py-6 bg-white text-black border-t border-gray-200"> {/* White bg, black text, light border */}
+      {/* Footer - Theme Aware - FINAL VERSION */}
+      <footer className="w-full py-6 bg-muted text-muted-foreground border-t border-border">
         <div className="container px-4 md:px-6">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             <div>
               <div className="flex items-center gap-2 mb-4">
-                <FileText className="h-6 w-6 text-blue-600" /> {/* Blue icon */}
-                <span className="text-xl font-bold text-black">Onuoha Systems</span> {/* Black text */}
+                <FileText className="h-6 w-6 text-blue-600" />
+                <span className="text-xl font-bold text-foreground">Onuoha Systems</span>
               </div>
-              <p className="text-gray-600">Professional resume writing services to help you land your dream job.</p> {/* Dark gray text */}
+              <p className="text-muted-foreground">Professional resume writing services to help you land your dream job.</p>
             </div>
             <div>
-              <h3 className="text-lg font-bold mb-4 text-black">Quick Links</h3> {/* Black heading */}
+              <h3 className="text-lg font-bold mb-4 text-foreground">Quick Links</h3>
               <ul className="space-y-2">
-                {/* Dark gray links, hover to black */}
-                <li><Link href="/" className="text-gray-600 hover:text-black transition-colors">Home</Link></li>
-                <li><Link href="/services" className="text-gray-600 hover:text-black transition-colors">Services</Link></li>
-                <li><Link href="/benefits" className="text-gray-600 hover:text-black transition-colors">Benefits</Link></li>
-                <li><Link href="/testimonials" className="text-gray-600 hover:text-black transition-colors">Testimonials</Link></li>
-                <li><Link href="/contact" className="text-gray-600 hover:text-black transition-colors">Contact</Link></li>
+                <li><Link href="/" className="text-muted-foreground hover:text-foreground transition-colors">Home</Link></li>
+                <li><Link href="/services" className="text-muted-foreground hover:text-foreground transition-colors">Services</Link></li>
+                <li><Link href="/benefits" className="text-muted-foreground hover:text-foreground transition-colors">Benefits</Link></li>
+                <li><Link href="/testimonials" className="text-muted-foreground hover:text-foreground transition-colors">Testimonials</Link></li>
+                <li><Link href="/contact" className="text-muted-foreground hover:text-foreground transition-colors">Contact</Link></li>
               </ul>
             </div>
             <div>
-              <h3 className="text-lg font-bold mb-4 text-black">Legal</h3> {/* Black heading */}
+              <h3 className="text-lg font-bold mb-4 text-foreground">Legal</h3>
               <ul className="space-y-2">
-                 {/* Dark gray links, hover to black */}
-                <li><Link href="/privacy-policy" className="text-gray-600 hover:text-black transition-colors">Privacy Policy</Link></li>
-                <li><Link href="/terms-of-service" className="text-gray-600 hover:text-black transition-colors">Terms of Service</Link></li>
+                <li><Link href="/privacy-policy" className="text-muted-foreground hover:text-foreground transition-colors">Privacy Policy</Link></li>
+                <li><Link href="/terms-of-service" className="text-muted-foreground hover:text-foreground transition-colors">Terms of Service</Link></li>
               </ul>
             </div>
           </div>
-          {/* Light border, dark gray text */}
-          <div className="mt-8 border-t border-gray-200 pt-6 text-center text-gray-500">
+          <div className="mt-8 border-t border-border pt-6 text-center text-muted-foreground">
             <p>© {new Date().getFullYear()} Onuoha Systems. All rights reserved.</p>
           </div>
         </div>

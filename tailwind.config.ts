@@ -79,8 +79,8 @@ const config = {
           "100%": { transform: "translateX(-50%) translateY(-50%) rotate(360deg)" },
         },
         "pulse-slow": {
-          "0%, 100%": { opacity: 0.4 },
-          "50%": { opacity: 0.8 },
+          "0%, 100%": { opacity: "0.4" },
+          "50%": { opacity: "0.8" },
         },
         float: {
           "0%, 100%": { transform: "translateY(0) scale(1.5)" },
@@ -97,7 +97,7 @@ const config = {
       },
     },
   },
-  plugins: [require("tailwindcss-animate")],
+  plugins: [require("tailwindcss-animate"), require("@tailwindcss/typography")],
 } satisfies Config
 
 export default config

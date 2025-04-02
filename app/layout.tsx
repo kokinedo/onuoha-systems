@@ -1,4 +1,4 @@
-import type React from "react"
+import type { Metadata } from "next";
 import "@/app/globals.css"
 import { Inter } from "next/font/google"
 import { ThemeProvider } from "@/components/theme-provider"
@@ -8,9 +8,9 @@ const inter = Inter({
   display: "swap",
 })
 
-export const metadata = {
-  title: "Onuoha Systems - Professional Resume Services",
-  description: "Custom ATS resume writing services to help you land your dream job.",
+export const metadata: Metadata = {
+  title: "Onuoha Systems - ATS Resume Writing",
+  description: "Professional resume writing services optimized for Applicant Tracking Systems (ATS). Get noticed and land more interviews.",
     generator: 'v0.dev'
 }
 
@@ -24,7 +24,7 @@ export default function RootLayout({
       <body className={inter.className}>
         <ThemeProvider
           attribute="class"
-          defaultTheme="dark"
+          defaultTheme="light"
           enableSystem={false}
           disableTransitionOnChange
         >

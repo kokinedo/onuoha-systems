@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button"
 import { FileText } from "lucide-react"
 import { MobileNav } from "@/components/ui/mobile-nav"
 import { FadeIn, FadeInWhenVisible } from "@/components/ui/fade-in"
+import { ThemeToggle } from "@/components/ui/theme-toggle"
 
 export default function PrivacyPolicyPage() {
   return (
@@ -34,23 +35,26 @@ export default function PrivacyPolicyPage() {
             </Link>
           </nav>
           <div className="flex items-center gap-4">
-            <Button variant="default" className="hidden md:inline-flex bg-blue-600 hover:bg-blue-700">Get Started</Button>
+            <Button variant="default" className="hidden md:inline-flex bg-blue-600 hover:bg-blue-700 text-primary-foreground" asChild>
+              <Link href="/contact">Get Started</Link>
+            </Button>
             <MobileNav />
+            <ThemeToggle />
           </div>
         </div>
       </header>
 
       <main className="flex-1">
-        {/* Hero Section - Use FadeIn */}
+        {/* Hero Section */}
         <FadeIn yOffset={-20} duration={0.6}>
-          <section className="w-full py-12 md:py-24 lg:py-32 bg-gradient-to-b from-blue-50 to-white">
+          <section className="w-full py-12 md:py-24 lg:py-32 bg-background">
             <div className="container px-4 md:px-6">
               <div className="flex flex-col items-center justify-center space-y-4 text-center">
                 <div className="space-y-2">
-                  <h1 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl lg:text-6xl">
+                  <h1 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl lg:text-6xl text-foreground">
                     Privacy Policy
                   </h1>
-                  <p className="max-w-[700px] text-gray-500 md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
+                  <p className="max-w-[700px] text-muted-foreground md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
                     Last updated:{" "}
                     {new Date().toLocaleDateString("en-US", { month: "long", day: "numeric", year: "numeric" })}
                   </p>
@@ -60,11 +64,11 @@ export default function PrivacyPolicyPage() {
           </section>
         </FadeIn>
 
-        {/* Privacy Policy Content - Use FadeInWhenVisible */}
+        {/* Privacy Policy Content */}
         <FadeInWhenVisible delay={0.1}>
           <section className="w-full py-12 md:py-20 lg:py-28 bg-background">
             <div className="container px-4 md:px-6">
-              <div className="prose prose-gray max-w-4xl mx-auto dark:prose-invert">
+              <div className="prose prose-gray dark:prose-invert max-w-4xl mx-auto">
                 <h2>Introduction</h2>
                 <p>
                   Onuoha Systems ("we," "our," or "us") respects your privacy and is committed to protecting it through
@@ -180,40 +184,36 @@ export default function PrivacyPolicyPage() {
         </FadeInWhenVisible>
       </main>
 
-      {/* Footer - White background and dark text */}
-      <footer className="w-full py-6 bg-white text-black border-t border-gray-200"> {/* White bg, black text, light border */}
+      {/* Footer - Theme Aware - FINAL VERSION */}
+      <footer className="w-full py-6 bg-muted text-muted-foreground border-t border-border">
         <div className="container px-4 md:px-6">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             <div>
               <div className="flex items-center gap-2 mb-4">
-                {/* Adjust icon color if needed, primary might be light on dark theme, but okay here */}
-                <FileText className="h-6 w-6 text-blue-600" /> {/* Or use text-primary if defined well */}
-                <span className="text-xl font-bold text-black">Onuoha Systems</span> {/* Black text */}
+                <FileText className="h-6 w-6 text-blue-600" />
+                <span className="text-xl font-bold text-foreground">Onuoha Systems</span>
               </div>
-              <p className="text-gray-600">Professional resume writing services to help you land your dream job.</p> {/* Dark gray text */}
+              <p className="text-muted-foreground">Professional resume writing services to help you land your dream job.</p>
             </div>
             <div>
-              <h3 className="text-lg font-bold mb-4 text-black">Quick Links</h3> {/* Black heading */}
+              <h3 className="text-lg font-bold mb-4 text-foreground">Quick Links</h3>
               <ul className="space-y-2">
-                {/* Dark gray links, hover to black */}
-                <li><Link href="/" className="text-gray-600 hover:text-black transition-colors">Home</Link></li> {/* Added Home link */}
-                <li><Link href="/services" className="text-gray-600 hover:text-black transition-colors">Services</Link></li>
-                <li><Link href="/benefits" className="text-gray-600 hover:text-black transition-colors">Benefits</Link></li>
-                <li><Link href="/testimonials" className="text-gray-600 hover:text-black transition-colors">Testimonials</Link></li>
-                <li><Link href="/contact" className="text-gray-600 hover:text-black transition-colors">Contact</Link></li>
+                <li><Link href="/" className="text-muted-foreground hover:text-foreground transition-colors">Home</Link></li>
+                <li><Link href="/services" className="text-muted-foreground hover:text-foreground transition-colors">Services</Link></li>
+                <li><Link href="/benefits" className="text-muted-foreground hover:text-foreground transition-colors">Benefits</Link></li>
+                <li><Link href="/testimonials" className="text-muted-foreground hover:text-foreground transition-colors">Testimonials</Link></li>
+                <li><Link href="/contact" className="text-muted-foreground hover:text-foreground transition-colors">Contact</Link></li>
               </ul>
             </div>
             <div>
-              <h3 className="text-lg font-bold mb-4 text-black">Legal</h3> {/* Black heading */}
+              <h3 className="text-lg font-bold mb-4 text-foreground">Legal</h3>
               <ul className="space-y-2">
-                 {/* Dark gray links, hover to black */}
-                <li><Link href="/privacy-policy" className="text-gray-600 hover:text-black transition-colors">Privacy Policy</Link></li>
-                <li><Link href="/terms-of-service" className="text-gray-600 hover:text-black transition-colors">Terms of Service</Link></li>
+                <li><Link href="/privacy-policy" className="text-muted-foreground hover:text-foreground transition-colors">Privacy Policy</Link></li>
+                <li><Link href="/terms-of-service" className="text-muted-foreground hover:text-foreground transition-colors">Terms of Service</Link></li>
               </ul>
             </div>
           </div>
-          {/* Light border, dark gray text */}
-          <div className="mt-8 border-t border-gray-200 pt-6 text-center text-gray-500">
+          <div className="mt-8 border-t border-border pt-6 text-center text-muted-foreground">
             <p>© {new Date().getFullYear()} Onuoha Systems. All rights reserved.</p>
           </div>
         </div>

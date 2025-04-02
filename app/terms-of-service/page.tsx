@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button"
 import { FileText } from "lucide-react"
 import { MobileNav } from "@/components/ui/mobile-nav"
 import { FadeIn, FadeInWhenVisible } from "@/components/ui/fade-in"
+import { ThemeToggle } from "@/components/ui/theme-toggle"
 
 export default function TermsOfServicePage() {
   return (
@@ -34,8 +35,11 @@ export default function TermsOfServicePage() {
             </Link>
           </nav>
           <div className="flex items-center gap-4">
-            <Button variant="default" className="hidden md:inline-flex bg-blue-600 hover:bg-blue-700">Get Started</Button>
+            <Button variant="default" className="hidden md:inline-flex bg-blue-600 hover:bg-blue-700 text-primary-foreground" asChild>
+              <Link href="/contact">Get Started</Link>
+            </Button>
             <MobileNav />
+            <ThemeToggle />
           </div>
         </div>
       </header>
@@ -93,36 +97,36 @@ export default function TermsOfServicePage() {
         </FadeInWhenVisible>
       </main>
 
-      {/* Footer - White background and dark text */}
-      <footer className="w-full py-6 bg-white text-black border-t border-gray-200">
+      {/* Footer - Theme Aware - FINAL VERSION */}
+      <footer className="w-full py-6 bg-muted text-muted-foreground border-t border-border">
         <div className="container px-4 md:px-6">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             <div>
               <div className="flex items-center gap-2 mb-4">
                 <FileText className="h-6 w-6 text-blue-600" />
-                <span className="text-xl font-bold text-black">Onuoha Systems</span>
+                <span className="text-xl font-bold text-foreground">Onuoha Systems</span>
               </div>
-              <p className="text-gray-600">Professional resume writing services to help you land your dream job.</p>
+              <p className="text-muted-foreground">Professional resume writing services to help you land your dream job.</p>
             </div>
             <div>
-              <h3 className="text-lg font-bold mb-4 text-black">Quick Links</h3>
+              <h3 className="text-lg font-bold mb-4 text-foreground">Quick Links</h3>
               <ul className="space-y-2">
-                <li><Link href="/" className="text-gray-600 hover:text-black transition-colors">Home</Link></li>
-                <li><Link href="/services" className="text-gray-600 hover:text-black transition-colors">Services</Link></li>
-                <li><Link href="/benefits" className="text-gray-600 hover:text-black transition-colors">Benefits</Link></li>
-                <li><Link href="/testimonials" className="text-gray-600 hover:text-black transition-colors">Testimonials</Link></li>
-                <li><Link href="/contact" className="text-gray-600 hover:text-black transition-colors">Contact</Link></li>
+                <li><Link href="/" className="text-muted-foreground hover:text-foreground transition-colors">Home</Link></li>
+                <li><Link href="/services" className="text-muted-foreground hover:text-foreground transition-colors">Services</Link></li>
+                <li><Link href="/benefits" className="text-muted-foreground hover:text-foreground transition-colors">Benefits</Link></li>
+                <li><Link href="/testimonials" className="text-muted-foreground hover:text-foreground transition-colors">Testimonials</Link></li>
+                <li><Link href="/contact" className="text-muted-foreground hover:text-foreground transition-colors">Contact</Link></li>
               </ul>
             </div>
             <div>
-              <h3 className="text-lg font-bold mb-4 text-black">Legal</h3>
+              <h3 className="text-lg font-bold mb-4 text-foreground">Legal</h3>
               <ul className="space-y-2">
-                <li><Link href="/privacy-policy" className="text-gray-600 hover:text-black transition-colors">Privacy Policy</Link></li>
-                <li><Link href="/terms-of-service" className="text-gray-600 hover:text-black transition-colors">Terms of Service</Link></li>
+                <li><Link href="/privacy-policy" className="text-muted-foreground hover:text-foreground transition-colors">Privacy Policy</Link></li>
+                <li><Link href="/terms-of-service" className="text-muted-foreground hover:text-foreground transition-colors">Terms of Service</Link></li>
               </ul>
             </div>
           </div>
-          <div className="mt-8 border-t border-gray-200 pt-6 text-center text-gray-500">
+          <div className="mt-8 border-t border-border pt-6 text-center text-muted-foreground">
             <p>© {new Date().getFullYear()} Onuoha Systems. All rights reserved.</p>
           </div>
         </div>
